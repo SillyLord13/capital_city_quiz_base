@@ -11,10 +11,9 @@ let resultTextElement = document.querySelector('#result')
 console.log(countriesAndCodes)  // You don't need to log countriesAndCodes - just proving it is available 
 
 
-// TODO when the page loads, select an element at random from the countriesAndCodes array
-
-// TODO display the country's name in the randomCountryElement 
-
+//display the country's name in the randomCountryElement
+let randCountryObj = countriesAndCodes[Math.floor(Math.random() * countriesAndCodes.length)]
+randomCountryElement.innerHTML = randCountryObj.name
 // TODO add a click event handler to the submitButton.  When the user clicks the button,
 //  * read the text from the userAnswerElement 
 //  * Use fetch() to make a call to the World Bank API with the two-letter country code (from countriesAndCodes, example 'CN' or 'AF')
@@ -26,7 +25,21 @@ console.log(countriesAndCodes)  // You don't need to log countriesAndCodes - jus
 //      If you want to be more flexible, include and use a string similarity library such as https://github.com/hiddentao/fast-levenshtein 
 //  * Finally, display an appropriate message in the resultTextElement to tell the user if they are right or wrong. 
 //      For example "Correct! The capital of Germany is Berlin" or "Wrong - the capital of Germany is not G, it is Berlin"
+submitButton.addEventListener('click', () =>{
+    let userAnswer = userAnswerElement.value
+    let url = `https://api.worldbank.org/v2/country/${randCountryObj.alpha2}?format=json`
+    fetch(url)
+        .then(res => res.json())
+        .then(countryData => {
+            console.log(countryData)
+            let lib1 = countryData[1]
+            let lib2 = lib1[0]
+            console.log(lib2.capitalcity)
+        }).catch( (err) =>{
+            console.log('ERROR',err)
+    })
 
+})
 
 // TODO finally, connect the play again button. Clear the user's answer, select a new random country, 
 // display the country's name, handle the user's guess. If you didn't use functions in the code you've 
