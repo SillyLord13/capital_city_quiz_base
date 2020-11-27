@@ -79,10 +79,3 @@ let countriesAndCodes = [
     {"name":"Virgin Islands (British)","alpha2":"VG","country-code":"092"},{"name":"Virgin Islands (U.S.)","alpha2":"VI","country-code":"850"},{"name":"Yemen","alpha2":"YE","country-code":"887"},
     {"name":"Zambia","alpha2":"ZM","country-code":"894"},{"name":"Zimbabwe","alpha2":"ZW","country-code":"716"}
 ]
-
-let randCountryObj = countriesAndCodes[Math.floor(Math.random() * countriesAndCodes.length)]
-console.log(randCountryObj.name)
-console.log(randCountryObj.alpha2)
-let url = `https://api.worldbank.org/v2/country/${randCountryObj.alpha2}?format=json`
-console.log(url)
-fetch(url).then(res => res.json()) 
